@@ -39,5 +39,80 @@ namespace sdds {
       int mon = (month >= 1 && month <= 12 ? month : 13)-1;
       return days[mon] + int((mon == 1) * ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
    }
-   
+
+   // Recommended methods for Utils
+
+   void Utils::alocpy(char*& destination, const char* source) {
+
+       delete[] destination;
+       destination = nullptr;
+       
+       if (source != nullptr)
+       {
+           destination = new char[strlen(source) + 1];
+           strcpy(destination, source);
+       }
+
+   }
+
+   int Utils::getint(const char* prompt = nullptr) {
+
+       int value;
+       bool success = false;
+
+       if (prompt != nullptr)
+       {
+           cout << prompt;
+       }
+
+       while (!success)
+       {
+           cin >> value;
+
+           if (!cin)
+           {
+               cout << "Invalid Integer, retry: "; 
+               cin.clear();
+               cin.ignore(2000, '\n');
+           }
+           else
+           {
+               success = true;
+           }
+       }
+
+   }
+
+   int Utils::getint(int min, int max, const char* prompt = nullptr, const char* errMes = nullptr) {
+
+       int value;
+       bool InRange = false;
+
+
+       if (prompt != nullptr)
+       {
+           cout << prompt;
+       }
+
+       while (!InRange)
+       {
+           value = getint();
+
+           if (value < min || value > max)
+           {
+               if (errMes != nullptr)
+               {
+                   cout << errMes << ", retry: ";
+               }
+               else
+               {
+                   cout << "Value out of range [" << min << "<=" << value << "<=" << max << "]: ";
+               }
+           }
+           else
+           {
+               InRange = true;
+           }
+       }
+       return value;
 }
