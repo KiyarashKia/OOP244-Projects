@@ -1,6 +1,6 @@
 #ifndef SDDS_DATE_H
 #define SDDS_DATE_H
-#include <ctime>
+#include <iostream>
 #include "Status.h"
 namespace sdds {
 
