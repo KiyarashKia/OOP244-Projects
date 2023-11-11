@@ -73,7 +73,7 @@ namespace sdds {
 			os << setfill('0') << setw(4) << year << '/' << setw(2) << month << '/' << setw(2) << day;
 		}
 		else {
-			os << setfill('0') << setw(2) << (year % 100) << setw(2) << month << setw(2) << day;
+			os << setfill('0') << setw(4) << year << '/' << setw(2) << month << '/' << setw(2) << day;
 		}
 		return os;
 	}
