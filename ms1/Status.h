@@ -8,6 +8,7 @@ namespace sdds {
 		int statCode;
 
 	public:
+
 		Status(const char* description = nullptr);
 
 		Status(const Status& other); // RO3

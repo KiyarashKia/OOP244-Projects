@@ -45,13 +45,20 @@ namespace sdds {
 
     void Utils::alocpy(char*& destination, const char* source) {
 
-        delete[] destination;
-        destination = nullptr;
+        if (destination != nullptr)
+        {
+            delete[] destination;
+        }
+        
 
         if (source != nullptr)
         {
             destination = new char[strlen(source) + 1];
             strcpy(destination, source);
+        }
+        else
+        {
+            destination = nullptr;
         }
 
     }

@@ -7,6 +7,7 @@ using namespace std;
 
 namespace sdds {
 
+
 	Status::Status(const char* description) {
 		descStatus = nullptr;
 		statCode = 0;
