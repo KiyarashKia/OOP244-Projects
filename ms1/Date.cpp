@@ -69,30 +69,40 @@ namespace sdds {
 	}
 
 	std::ostream& Date::write(std::ostream& os) const {
-
 		if (format) {
 			os << year << "/" << std::setw(2) << std::setfill('0') << month << "/" << std::setw(2) << day;
 		}
 		else {
-			os << (year % 100) << std::setw(2) << month << std::setw(2) << day;
+			os << year << "/" << std::setw(2) << std::setfill('0') << month << "/" << std::setw(2) << day;
 		}
 		return os;
 	}
 
+
 	std::istream& Date::read(std::istream& is) {
-		int y, m, d;
+		int input;
+		is >> input;
 
-		y = ut.getint(currentYear, MAXIMUM_YEAR_VALUE);
-		m = ut.getint(1, 12);
-		d = ut.getint(1, ut.daysOfMon(m, y));
-
-		if (!is.fail()) {
-			year = y;
-			month = m;
-			day = d;
-			if (!validate()) {
-				is.setstate(std::ios::failbit);
+		if (is)
+		{
+			if (input >= 1 && input <= 9999) {
+				year = currentYear;
+				month = input / 100;
+				day = input % 100;
 			}
+			else if (input >= 100000 && input <= 999999) {
+				year = input / 10000 + 2000;
+				input %= 10000;
+				month = input / 100;
+				day = input % 100;
+
+			}
+
+
+			if (!validate()) is.setstate(std::ios::badbit);
+		}
+		else {
+			State = "Invalid date value";
 		}
 		return is;
 	}

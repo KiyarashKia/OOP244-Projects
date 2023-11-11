@@ -35,10 +35,10 @@ int main() {
    Date C;
    Date F(2024, 2, 3);
    cout << "Current Date formatted (C): " << C << endl;
-   C.format(false);
+   C.formatted(false);
    cout << "Current Date unformatted (C): " << C << endl;
    cout << "Future Date formatted (F): " << F << endl;
-   F.format(false);
+   F.formatted(false);
    cout << "Future Date unformatted (F): " << F << endl;
    cout << "The current date is" << (C != F ? " NOT" : "") << " the same as the future date" << endl;
    cout << "The current date is" << (C == C ? "" : " NOT") << " the same as the current date" << endl;
