@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include "Status.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -10,11 +11,7 @@ namespace sdds {
 		descStatus = nullptr;
 		statCode = 0;
 
-		if (description)
-		{
-			descStatus = new char[strlen(description) + 1];
-			strcpy(descStatus, description);
-		}
+		ut.alocpy(descStatus, description);
 
 	}
 
@@ -23,32 +20,13 @@ namespace sdds {
 	Status::Status(const Status& other) {
 		statCode = other.statCode;
 
-		if (other.descStatus != nullptr)
-		{
-			descStatus = new char[strlen(other.descStatus) + 1];
-			strcpy(descStatus, other.descStatus);
-		}
-		else
-		{
-			descStatus = nullptr;
-		}
+		ut.alocpy(descStatus, other.descStatus);
 	}
 
 	Status& Status::operator=(const Status& other) {
-		if (this != &other)
-		{
+		if (this != &other) {
 			statCode = other.statCode;
-		}
-		delete[]  descStatus;	// check here 
-
-		if (other.descStatus)
-		{
-			descStatus = new char[strlen(other.descStatus) + 1];
-			strcpy(descStatus, other.descStatus);
-		}
-		else
-		{
-			descStatus = nullptr;
+			ut.alocpy(descStatus, other.descStatus);
 		}
 		return *this;
 	}
@@ -63,16 +41,7 @@ namespace sdds {
 	}
 
 	Status& Status::operator=(const char* newDesc) {
-		delete[] descStatus;
-		if (newDesc)
-		{
-			descStatus = new char[strlen(newDesc) + 1];
-			strcpy(descStatus, newDesc);
-		}
-		else
-		{
-			descStatus = nullptr;
-		}
+		ut.alocpy(descStatus, newDesc);
 		return *this;
 	}
 

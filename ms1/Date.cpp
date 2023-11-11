@@ -1,1 +1,133 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include "Date.h"
+#include "Utils.h"
+#include <iomanip>
+
+using namespace std;
+namespace sdds {
+
+	Date::Date() {
+		int y, m, d;
+		ut.getSystemDate(&y, &m, &d);
+		year = y;
+		month = m;
+		day = d;
+		validate();
+	}
+
+
+	bool Date::validate() {
+		bool failure = false;
+		if (year < currentYear || year > MAXIMUM_YEAR_VALUE) {
+			State = "Invalid year in date";
+			State = 1;
+			failure = true;
+		}
+		if (!failure && (month < 1 || month > 12)) {
+			State = "Invalid month in date";
+			State = 2;
+			failure = true;
+		}
+		if (!failure && (day < 1 || day > ut.daysOfMon(month, year))) {
+			State = "Invalid day in date";
+			State = 3;
+			failure = true;
+		}
+		if (!failure) {
+			State.clear();
+		}
+		return !failure;
+	}
+
+
+	int Date::uniqueDateValue() const {
+
+		return year * 372 + month * 31 + day;
+	}
+
+	Date::Date(int y, int m, int d) {
+		year = y;
+		month = m;
+		day = d;
+		format = false;
+		validate();
+	}
+
+	const Status& Date::state() const {
+		return State;
+	}
+
+	Date& Date::formatted(bool value) {
+
+		format = value;
+		return *this;
+	}
+
+	Date::operator bool() const {
+		return !State;
+	}
+
+	std::ostream& Date::write(std::ostream& os) const {
+
+		if (format) {
+			os << year << "/" << std::setw(2) << std::setfill('0') << month << "/" << std::setw(2) << day;
+		}
+		else {
+			os << (year % 100) << std::setw(2) << month << std::setw(2) << day;
+		}
+		return os;
+	}
+
+	std::istream& Date::read(std::istream& is) {
+		int y, m, d;
+
+		y = ut.getint(currentYear, MAXIMUM_YEAR_VALUE);
+		m = ut.getint(1, 12);
+		d = ut.getint(1, ut.daysOfMon(m, y));
+
+		if (!is.fail()) {
+			year = y;
+			month = m;
+			day = d;
+			if (!validate()) {
+				is.setstate(std::ios::failbit);
+			}
+		}
+		return is;
+	}
+
+	std::ostream& operator<<(std::ostream& os, const Date& date) {
+		return date.write(os);
+	}
+
+	std::istream& operator>>(std::istream& is, Date& date) {
+		return date.read(is);
+	}
+	
+
+	bool Date::operator==(const Date& rhs) const {
+		return this->uniqueDateValue() == rhs.uniqueDateValue();
+	}
+
+	bool Date::operator!=(const Date& rhs) const {
+		return this->uniqueDateValue() != rhs.uniqueDateValue();
+	}
+
+	bool Date::operator<(const Date& rhs) const {
+		return this->uniqueDateValue() < rhs.uniqueDateValue();
+	}
+
+	bool Date::operator>(const Date& rhs) const {
+		return this->uniqueDateValue() > rhs.uniqueDateValue();
+	}
+
+	bool Date::operator<=(const Date& rhs) const {
+		return this->uniqueDateValue() <= rhs.uniqueDateValue();
+	}
+
+	bool Date::operator>=(const Date& rhs) const {
+		return this->uniqueDateValue() >= rhs.uniqueDateValue();
+	}
+
+}
