@@ -19,6 +19,8 @@ namespace sdds {
 	// RO3
 	
 	Status::Status(const Status& other) {
+
+		descStatus = nullptr;
 		statCode = other.statCode;
 
 		ut.alocpy(descStatus, other.descStatus);
