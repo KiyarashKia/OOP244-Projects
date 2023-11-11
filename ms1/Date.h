@@ -10,11 +10,11 @@ namespace sdds {
 
 	class Date {
 
-		int year;
-		int month;
-		int day;
+		int year{};
+		int month{};
+		int day{};
 		Status State;
-		bool format;
+		bool format{ false };
 
 		bool validate();
 		int uniqueDateValue() const;
