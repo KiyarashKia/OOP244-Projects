@@ -73,7 +73,7 @@ namespace sdds {
 			os << year << "/" << std::setw(2) << std::setfill('0') << month << "/" << std::setw(2) << day;
 		}
 		else {
-			os << year << "/" << std::setw(2) << std::setfill('0') << month << "/" << std::setw(2) << day;
+			os << setfill('0') << setw(2) << (year % 100) << setw(2) << month << setw(2) << day;
 		}
 		return os;
 	}
