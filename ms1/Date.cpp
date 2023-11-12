@@ -14,6 +14,7 @@ namespace sdds {
 		month = m;
 		day = d;
 		validate();
+		format = true;
 	}
 
 
@@ -50,7 +51,7 @@ namespace sdds {
 		year = y;
 		month = m;
 		day = d;
-		format = false;
+		format = true;
 		validate();
 	}
 
