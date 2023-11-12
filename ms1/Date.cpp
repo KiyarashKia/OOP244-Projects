@@ -22,17 +22,17 @@ namespace sdds {
 		if (year < currentYear || year > MAXIMUM_YEAR_VALUE) {
 			State = "Invalid year in date";
 			State = 1;
-			failure = true;
+			failure = false;
 		}
 		if (!failure && (month < 1 || month > 12)) {
 			State = "Invalid month in date";
 			State = 2;
-			failure = true;
+			failure = false;
 		}
 		if (!failure && (day < 1 || day > ut.daysOfMon(month, year))) {
 			State = "Invalid day in date";
 			State = 3;
-			failure = true;
+			failure = false;
 		}
 		if (!failure) {
 			State.clear();
@@ -70,10 +70,14 @@ namespace sdds {
 
 	std::ostream& Date::write(std::ostream& os) const {
 		if (format) {
-			os << setfill('0') << setw(4) << year << '/' << setw(2) << month << '/' << setw(2) << day;
+			os << setfill('0') << setw(4) << year << '/'
+				<< setw(2) << month << '/'
+				<< setw(2) << day;
 		}
 		else {
-			os << setfill('0') << setw(4) << year << '/' << setw(2) << month << '/' << setw(2) << day;
+			os << setfill('0') << setw(2) << (year % 100)
+				<< setw(2) << month
+				<< setw(2) << day;
 		}
 		return os;
 	}

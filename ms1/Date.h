@@ -14,7 +14,7 @@ namespace sdds {
 		int month{};
 		int day{};
 		Status State;
-		bool format{ false };
+		bool format{ true };
 
 		bool validate();
 		int uniqueDateValue() const;
