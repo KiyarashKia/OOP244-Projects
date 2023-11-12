@@ -1,3 +1,12 @@
+/*
+I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+Student : Kiarash Kia
+Student ID: 108688235
+Email: kkia2@myseneca.ca
+Milestone 1 - Date.cpp
+Date : 11/11/2023
+ */
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include "Date.h"
@@ -8,6 +17,7 @@ using namespace std;
 namespace sdds {
 
 	Date::Date() {
+
 		int y, m, d;
 		ut.getSystemDate(&y, &m, &d);
 		year = y;
@@ -74,14 +84,10 @@ namespace sdds {
 
 	std::ostream& Date::write(std::ostream& os) const {
 		if (format) {
-			os << setfill('0') << setw(4) << year << '/'
-				<< setw(2) << month << '/'
-				<< setw(2) << day;
+			os << setfill('0') << setw(4) << year << '/' << setw(2) << month << '/' << setw(2) << day;
 		}
 		else {
-			os << setfill('0') << setw(2) << (year % 100)
-				<< setw(2) << month
-				<< setw(2) << day;
+			os << setfill('0') << setw(2) << (year % 100) << setw(2) << month << setw(2) << day;
 		}
 		return os;
 	}
