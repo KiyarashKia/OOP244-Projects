@@ -19,26 +19,29 @@ namespace sdds {
 
 
 	bool Date::validate() {
-		bool failure = false;
-		if (year < currentYear || year > MAXIMUM_YEAR_VALUE) {
+		bool failure{};
+
+		if (year < currentYear || year > MAXIMUM_YEAR_VALUE)
+		{
 			State = "Invalid year in date";
 			State = 1;
 			failure = false;
 		}
-		if (!failure && (month < 1 || month > 12)) {
+		else if (month < 1 || month > 12) {
 			State = "Invalid month in date";
 			State = 2;
 			failure = false;
 		}
-		if (!failure && (day < 1 || day > ut.daysOfMon(month, year))) {
+		else if (day < 1 || day > ut.daysOfMon(month, year)) {
 			State = "Invalid day in date";
 			State = 3;
 			failure = false;
 		}
-		if (!failure) {
+		else {
 			State.clear();
+			failure = true;
 		}
-		return !failure;
+		return failure;
 	}
 
 
