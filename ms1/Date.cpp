@@ -97,14 +97,19 @@ namespace sdds {
 			}
 			else if (input >= 100000 && input <= 999999) {
 				year = input / 10000 + 2000;
-				input %= 10000;
-				month = input / 100;
+				month = (input % 10000) / 100;
 				day = input % 100;
 
 			}
+			else {
+				State = "Invalid date value";
+				is.setstate(std::ios::failbit);
+				return is;
+			}
 
-
-			if (!validate()) is.setstate(std::ios::badbit);
+			if (!validate()) {
+				is.setstate(std::ios::badbit);
+			}
 		}
 		else {
 			State = "Invalid date value";
