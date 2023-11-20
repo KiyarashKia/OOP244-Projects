@@ -10,6 +10,14 @@
 // -----------------------------------------------------------
 // Name                 Date            Reason
 ***********************************************************************/
+/*
+I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+Student : Kiarash Kia
+Student ID: 108688235
+Email: kkia2@myseneca.ca
+Milestone 2 - main.cpp
+Date : 11/20/2023
+ */
 #include <iostream>
 #include "Menu.h"
 #include "AidMan.h"

@@ -1,3 +1,12 @@
+/*
+I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+Student : Kiarash Kia
+Student ID: 108688235
+Email: kkia2@myseneca.ca
+Milestone 2 - Menu.cpp
+Date : 11/20/2023
+ */
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
@@ -73,6 +82,23 @@ namespace sdds {
             cout << "Invalid Menu!" << endl;
             return 0;
         }
+    }
+
+    void Menu::printItem(unsigned int option) {
+        int counter = 1;
+        for (int i = 0; i < strlen(options); i++)
+        {
+            if (options[i] == '\t')
+            {
+                counter++;
+                i++;
+            }
+            if (counter == option)
+            {
+                cout << options[i];
+            }
+        }
+
     }
 
 
