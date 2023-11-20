@@ -22,7 +22,7 @@ namespace sdds {
         options = nullptr;
 
         if (content != nullptr) {
-            for (int i = 0; i < strlen(content); i++) {
+            for (size_t i = 0; i < strlen(content); i++) {
                 if (content[i] == '\t') numOptions++;
             }
 
@@ -86,7 +86,7 @@ namespace sdds {
 
     void Menu::printItem(unsigned int option) {
         int counter = 1;
-        for (int i = 0; i < strlen(options); i++)
+        for (size_t i = 0; i < strlen(options); i++)
         {
             if (options[i] == '\t')
             {
