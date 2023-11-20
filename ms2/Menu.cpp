@@ -44,7 +44,7 @@ namespace sdds {
 
  
     unsigned int Menu::run() const {
-        int userInput{ 0 };
+        unsigned int userInput{ 0 };
         int index{ 1 };
 
         if (options) {
