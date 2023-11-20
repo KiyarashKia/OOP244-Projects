@@ -44,10 +44,10 @@ namespace sdds {
 
  
     unsigned int Menu::run() const {
-        int userInput = 0;
-        int index = 1;
+        int userInput{ 0 };
+        int index{ 1 };
 
-        if (options) {  // Start of the 'if' block
+        if (options) {
             cout << index << "- ";
             for (size_t i = 0; i < strlen(options); i++) {
                 if (options[i] == '\t') {
@@ -75,12 +75,10 @@ namespace sdds {
                     cin.clear();
                 }
             } while (userInput < 0 || userInput > index);
-
-            return userInput;
         }
         else { 
             cout << "Invalid Menu!" << endl;
-            return 0;
+            return userInput;
         }
     }
 
