@@ -68,7 +68,7 @@ namespace sdds {
                     cin.ignore(1000, '\n');
                     cout << "Invalid Integer, retry: ";
                     cin.clear();
-                    userInput = false;
+                    userInput = -1;
                 }
                 else if (userInput < 0 || userInput > index) {
                     cout << "Value out of range [0<=val<=" << index << "]: ";
