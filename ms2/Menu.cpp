@@ -85,7 +85,7 @@ namespace sdds {
     }
 
     void Menu::printItem(unsigned int option) {
-        int counter = 1;
+        unsigned int counter = 1;
         for (size_t i = 0; i < strlen(options); i++)
         {
             if (options[i] == '\t')
