@@ -24,7 +24,7 @@ namespace sdds {
 	unsigned int AidMan::menu() {
 		int year, month, day;
 
-		cout << "Aid Management System prototype\n";
+		cout << "Aid Management System\n";
 		ut.getSystemDate(&year, &month, &day);
 		cout << "Date: " << year << "/" << (month < 10 ? "0" : "") 
 			<< month << "/" << (day < 10 ? "0" : "") << day << "\n";
