@@ -44,8 +44,8 @@ namespace sdds {
 
  
     unsigned int Menu::run() const {
-        unsigned int userInput{ 0 };
-        int index{ 1 };
+        int userInput = 0;
+        unsigned int index = 1;
 
         if (options) {
             cout << index << "- ";
@@ -70,17 +70,18 @@ namespace sdds {
                     cin.clear();
                     userInput = -1;
                 }
-                else if (userInput < 0 || userInput > index) {
+                else if (userInput < 0 || static_cast<unsigned int>(userInput) > index) {
                     cout << "Value out of range [0<=val<=" << index << "]: ";
                     cin.clear();
                 }
-            } while (userInput < 0 || userInput > index);
+            } while (userInput < 0 || static_cast<unsigned int>(userInput) > index);
         }
-        else { 
+        else {
             cout << "Invalid Menu!" << endl;
-            return userInput;
         }
+        return static_cast<unsigned int>(userInput);
     }
+
 
     void Menu::printItem(unsigned int option) {
         unsigned int counter = 1;
