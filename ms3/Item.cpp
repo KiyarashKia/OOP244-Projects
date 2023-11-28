@@ -13,15 +13,17 @@ namespace sdds {
         state.clear();
     }
     
+
+
     Item::Item(const Item& other)
         : iProduct(other),
-        m_sku(other.m_sku),
-        state(other.state),
         price(other.price),
-        quantity(other.quantity), // as I had warning for not initializing
-        nQuantity(other.nQuantity), // as I had warning for not initializing
-        flagLinear(other.flagLinear), // as I had warning for not initializing
-        descItem(nullptr) {  // as I had warning for not initializing
+        quantity(other.quantity),  // as I had warning for not initializing
+        nQuantity(other.nQuantity),  // as I had warning for not initializing
+        descItem(nullptr), // as I had warning for not initializing
+        flagLinear(other.flagLinear),  // as I had warning for not initializing
+        state(other.state),
+        m_sku(other.m_sku) {
         ut.alocpy(descItem, other.descItem);
     }
 
@@ -78,9 +80,9 @@ namespace sdds {
     }
 
     bool Item::operator==(const char* description) const {
-
-        return description != nullptr && descItem != nullptr && strstr(descItem, description) != nullptr; // Searched over web to be able to fix this warning
+        return description != nullptr && descItem != nullptr && strstr(descItem, description) != nullptr;
     }
+
 
     std::ofstream& Item::save(std::ofstream& ofstr) const {
         if (state) {
