@@ -172,7 +172,7 @@ namespace sdds {
 
         nQuantity = ut.getint(1, 9999, "Quantity Needed: ");
         quantity = ut.getint(0, nQuantity, "Quantity On Hand: ");
-        price = ut.getDoubleInRange(0.0, 9999.0, "Unit Price: $");
+        price = ut.getdouble(0.0, 9999.0, "Unit Price: $");
 
         return istr;
     }

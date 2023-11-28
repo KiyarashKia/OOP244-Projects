@@ -124,7 +124,7 @@ namespace sdds {
                 }
                 else
                 {
-                    cout << "Value out of range [" << min << "<=" << value << "<=" << max << "]: ";
+                    cout << "Value out of range [" << std::fixed << std::setprecision(2) << min << "<=val<=" << max << "]: ";
                 }
             }
             else
@@ -135,24 +135,52 @@ namespace sdds {
         return value;
     }
 
-    double Utils::getDoubleInRange(double min, double max, const char* prompt) {
+
+    double Utils::getdouble(const char* prompt) {
         double value;
-        bool valid = false;
+        bool success = false;
 
-        while (!valid) {
+        if (prompt != nullptr) {
             cout << prompt;
-            cin >> value;
-
-            if (cin.fail() || value < min || value > max) {
-                cout << "Value out of range [" << std::fixed << std::setprecision(2) << min << "<=val<=" << max << "]: ";                
-                cin.clear();
-                cin.ignore(1000, '\n');
-            }
-            else {
-                valid = true;
-            }
         }
 
+        while (!success) {
+            cin >> value;
+            if (!cin) {
+                cout << "Invalid number, retry: ";
+                cin.clear();
+                cin.ignore(2000, '\n');
+            }
+            else {
+                success = true;
+            }
+        }
+        return value;
+    }
+
+
+    double Utils::getdouble(double min, double max, const char* prompt, const char* errMes) {
+        double value;
+        bool InRange = false;
+
+        if (prompt != nullptr) {
+            cout << prompt;
+        }
+
+        while (!InRange) {
+            value = getdouble();
+            if (value < min || value > max) {
+                if (errMes != nullptr) {
+                    cout << errMes << ", retry: ";
+                }
+                else {
+                    cout << "Value out of range [" << std::fixed << std::setprecision(2) << min << "<=val<=" << max << "]: ";
+                }
+            }
+            else {
+                InRange = true;
+            }
+        }
         return value;
     }
 
