@@ -1,8 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 
+#include <iomanip>
+#include <cstring>
 #include "Item.h"
 #include "Utils.h"
-#include <iomanip>
+
 
 namespace sdds {
 

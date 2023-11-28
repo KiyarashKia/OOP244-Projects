@@ -30,26 +30,24 @@ namespace sdds {
 		Item(const Item& other);
 		Item& operator=(const Item& other);
 
-		virtual int qtyNeeded() const override;
-		virtual int qty() const override;
-		virtual operator double() const override;
-		virtual operator bool() const override;
+		int qtyNeeded() const override;
+		int qty() const override;
+		operator double() const override;
+		operator bool() const override;
 
-		virtual int operator-=(int qty) override;
-		virtual int operator+=(int qty) override;
-		virtual bool linear(bool isLinear) override;
+		int operator-=(int qty) override;
+		int operator+=(int qty) override;
+		bool linear(bool isLinear) override;
 
 		void clear();
 
-		virtual bool operator==(int sku) const override;
-		virtual bool operator==(const char* description) const override;
+		bool operator==(int sku) const override;
+		bool operator==(const char* description) const override;
 
 		virtual std::ofstream& save(std::ofstream& ofstr) const override;
 		virtual std::ifstream& load(std::ifstream& ifstr) override;
 		virtual std::ostream& display(std::ostream& ostr) const override;
 		virtual std::istream& read(std::istream& istr) override;
-
-
 		virtual int readSku(std::istream& istr) override;
 	};
 
