@@ -3,7 +3,6 @@
 #include <iostream>
 #include "iProduct.h"
 
-namespace sdds {
 
 	std::ostream& sdds::operator<<(std::ostream& ostr, const iProduct& product)
 	{
@@ -14,4 +13,4 @@ namespace sdds {
 	{
 		return product.read(istr);
 	}
-}
+

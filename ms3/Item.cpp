@@ -70,8 +70,8 @@ namespace sdds {
     }
 
     bool Item::operator==(const char* description) const {
-        if (description == nullptr || descItem == nullptr) return false;
-        return std::strstr(descItem, description) != nullptr;
+
+        return description != nullptr && descItem != nullptr && std::strstr(descItem, description) != nullptr; // Searched over web to be able to fix this warning
     }
 
     std::ofstream& Item::save(std::ofstream& ofstr) const {
@@ -123,7 +123,7 @@ namespace sdds {
 
             if (descItem) {
                 char buffer[36]{ '\0' };
-                std::strncpy(buffer, descItem, 35);
+                strncpy(buffer, descItem, 35);
                 buffer[35] = '\0';
                 ostr << std::setw(35) << std::left << std::setfill(' ') << buffer << " | ";
             }
@@ -131,8 +131,7 @@ namespace sdds {
                 ostr << std::setw(35) << std::left << std::setfill(' ') << " " << " | ";
             }
 
-            ostr << std::setw(4) << std::right << quantity << " | "
-                << std::setw(4) << nQuantity << " | "
+            ostr << std::setw(4) << std::right << quantity << " | " << std::setw(4) << nQuantity << " | "
                 << std::setw(7) << std::fixed << std::setprecision(2) << price << " |";
         }
         else {
