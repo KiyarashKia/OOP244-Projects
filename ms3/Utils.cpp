@@ -135,7 +135,6 @@ namespace sdds {
         return value;
     }
 
-
     double Utils::getdouble(const char* prompt) {
         double value;
         bool success = false;

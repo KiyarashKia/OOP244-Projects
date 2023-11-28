@@ -55,6 +55,4 @@ namespace sdds {
 }
 
 
-
-
 #endif // !SDDS_ITEM_H
