@@ -159,6 +159,7 @@ namespace sdds {
     }
 
 
+
     double Utils::getdouble(double min, double max, const char* prompt, const char* errMes) {
         double value;
         bool InRange = false;
