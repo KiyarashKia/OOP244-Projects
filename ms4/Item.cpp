@@ -23,7 +23,7 @@ namespace sdds {
         delete[] descItem;
         state.clear();
     }
-    
+
 
 
     Item::Item(const Item& other)
@@ -76,7 +76,7 @@ namespace sdds {
         quantity += qty;
         return quantity;
     }
-      
+
     void Item::linear(bool isLinear) {
         flagLinear = isLinear;
     }
@@ -139,33 +139,32 @@ namespace sdds {
 
 
     std::ostream& Item::display(std::ostream& ostr) const {
-        if (state) {
-            if (linear()) {
+        if (!state) {
+            ostr << state;
+        }
+        else if (flagLinear) {
+            ostr << std::setw(5) << std::setfill('0') << m_sku << " | ";
+
+            if (descItem) {
                 char buffer[36]{ '\0' };
-
-                ostr << std::setw(5) << std::setfill('0') << m_sku << " | ";
-
-                if (descItem) {
-                    std::strncpy(buffer, descItem, 35);
-                    buffer[35] = '\0';
-                    ostr << std::setw(35) << std::left << std::setfill(' ') << buffer << " | ";
-                }
-
-                ostr << std::setw(4) << std::right << quantity << " | "
-                    << std::setw(4) << nQuantity << " | "
-                    << std::setw(7) << std::fixed << std::setprecision(2) << price << " |";
+                strncpy(buffer, descItem, 35);
+                buffer[35] = '\0';
+                ostr << std::setw(35) << std::left << std::setfill(' ') << buffer << " | ";
             }
             else {
-                ostr << "AMA Item:" << std::endl;
-                ostr << m_sku << ": " << descItem << std::endl;
-                ostr << "Quantity Needed: " << nQuantity << std::endl;
-                ostr << "Quantity Available: " << quantity << std::endl;
-                ostr << "Unit Price: $" << std::fixed << std::setprecision(2) << price << std::endl;
-                ostr << "Needed Purchase Fund: $" << std::fixed << std::setprecision(2) << (price * (nQuantity - quantity)) << std::endl;
+                ostr << std::setw(35) << std::left << std::setfill(' ') << " " << " | ";
             }
+
+            ostr << std::setw(4) << std::right << quantity << " | " << std::setw(4) << nQuantity << " | "
+                << std::setw(7) << std::fixed << std::setprecision(2) << price << " |";
         }
         else {
-            ostr << state;
+            ostr << "AMA Item:" << std::endl;
+            ostr << m_sku << ": " << (descItem ? descItem : "") << std::endl;
+            ostr << "Quantity Needed: " << nQuantity << std::endl;
+            ostr << "Quantity Available: " << quantity << std::endl;
+            ostr << "Unit Price: $" << std::fixed << std::setprecision(2) << price << std::endl;
+            ostr << "Needed Purchase Fund: $" << std::fixed << std::setprecision(2) << (nQuantity - quantity) * price << std::endl;
         }
         return ostr;
     }
@@ -178,6 +177,7 @@ namespace sdds {
 
         char tmp[1000]{ '\0' };
         std::cout << "Description: ";
+        istr >> tmp;
         istr.getline(tmp, 1000, '\n');
         ut.alocpy(descItem, tmp);
 
@@ -195,4 +195,3 @@ namespace sdds {
     }
 
 }
- 

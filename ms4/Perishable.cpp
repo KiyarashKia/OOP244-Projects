@@ -46,10 +46,10 @@ namespace sdds {
 	// Virtuals
 	int Perishable::readSku(std::istream& istr) {
 		m_sku = ut.getint(10000, 39999, "SKU: ");
-		
+
 		istr.clear();
 		istr.ignore();
-		
+
 		return m_sku;
 	}
 
@@ -114,7 +114,7 @@ namespace sdds {
 		}
 		return ostr;
 	}
-	
+
 
 	std::istream& Perishable::read(std::istream& istr) {
 		Item::read(istr);
@@ -128,7 +128,7 @@ namespace sdds {
 		std::cout << "Handling Instructions, ENTER to skip: ";
 		if (istr.peek() != '\n')
 		{
-			char tmp[1000] {'\0'};
+			char tmp[1000]{ '\0' };
 			istr.getline(tmp, 1000, '\n');
 			ut.alocpy(m_handling, tmp);
 		}
@@ -139,7 +139,7 @@ namespace sdds {
 		else
 		{
 			Item::state.clear();
-		
+
 		}
 		return istr;
 	}

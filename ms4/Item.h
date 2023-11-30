@@ -10,6 +10,8 @@ Date : 11/28/2023
 #ifndef SDDS_ITEM_H
 #define SDDS_ITEM_H
 
+#include <iostream>
+
 #include "iProduct.h"
 #include "Status.h"
 
