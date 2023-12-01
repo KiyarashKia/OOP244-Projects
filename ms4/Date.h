@@ -3,8 +3,8 @@ I have done all the coding by myself and only copied the code that my professor 
 Student : Kiarash Kia
 Student ID: 108688235
 Email: kkia2@myseneca.ca
-Milestone 2 - Date.h
-Date : 11/20/2023
+MS4 - Date.h
+Date : 12/01/2023
  */
 
 #ifndef SDDS_DATE_H

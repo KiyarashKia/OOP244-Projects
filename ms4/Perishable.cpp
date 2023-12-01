@@ -1,3 +1,12 @@
+/*
+I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+Student : Kiarash Kia
+Student ID: 108688235
+Email: kkia2@myseneca.ca
+MS4 - Perishable.cpp
+Date : 12/01/2023
+ */
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <fstream>
@@ -56,12 +65,12 @@ namespace sdds {
 
 	std::ofstream& Perishable::save(std::ofstream& ofstr) const {
 
-
 		if (Item::operator bool()) {
 			Item::save(ofstr) << '\t';
 			if (m_handling && strlen(m_handling)) ofstr << m_handling;
-			const_cast<Date&>(exDate).formatted(false);
-			ofstr << '\t' << exDate;
+			Date tempDate = exDate;
+			tempDate.formatted(false);
+			ofstr << '\t' << tempDate;
 		}
 		return ofstr;
 	}
