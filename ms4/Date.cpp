@@ -57,7 +57,6 @@ namespace sdds {
 		return failure;
 	}
 
-
 	int Date::uniqueDateValue() const {
 
 		return year * 372 + month * 31 + day;

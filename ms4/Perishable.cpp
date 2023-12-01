@@ -90,6 +90,7 @@ namespace sdds {
 			delete[] m_handling;
 			m_handling = nullptr;
 		}
+
 		else
 		{
 			state.clear();
