@@ -57,15 +57,10 @@ namespace sdds {
 	std::ofstream& Perishable::save(std::ofstream& ofstr) const {
 
 
-		if (this->state)
-		{
-			Date exDate = m_exDate;
-			exDate.formatted(false);
+		if (Item::operator bool()) {
 			Item::save(ofstr) << '\t';
-			if (m_handling && m_handling[0] != '\0')
-			{
-				ofstr << m_handling;
-			}
+			if (m_handling && strlen(m_handling)) ofstr << m_handling;
+			const_cast<Date&>(exDate).formatted(false);
 			ofstr << '\t' << exDate;
 		}
 		return ofstr;
