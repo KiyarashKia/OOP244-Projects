@@ -7,6 +7,7 @@
 
 #include "Perishable.h"
 #include "Utils.h"
+#include "Date.h"
 
 
 namespace sdds {
@@ -54,11 +55,13 @@ namespace sdds {
 	}
 
 	std::ofstream& Perishable::save(std::ofstream& ofstr) const {
-		Item::save(ofstr);
+
 
 		if (this->state)
 		{
-			ofstr << '\t';
+			Date exDate = m_exDate;
+			exDate.formatted(false);
+			Item::save(ofstr) << '\t';
 			if (m_handling && m_handling[0] != '\0')
 			{
 				ofstr << m_handling;

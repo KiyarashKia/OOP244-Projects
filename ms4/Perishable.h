@@ -10,6 +10,7 @@ namespace sdds {
 	class Perishable : public Item {
 
 		Date exDate{};
+		Date m_exDate{};
 		char* m_handling{};
 
 	public:

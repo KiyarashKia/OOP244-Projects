@@ -9,6 +9,8 @@ Date : 11/28/2023
 
 #define _CRT_SECURE_NO_WARNINGS
 
+#include <fstream>
+#include <iostream>
 #include <iomanip>
 #include <cstring>
 #include "Item.h"
@@ -23,7 +25,7 @@ namespace sdds {
         delete[] descItem;
         state.clear();
     }
-
+    
 
 
     Item::Item(const Item& other)
@@ -34,7 +36,8 @@ namespace sdds {
         descItem(nullptr), // as I had warning for not initializing
         flagLinear(other.flagLinear),  // as I had warning for not initializing
         state(other.state),
-        m_sku(other.m_sku) {
+        m_sku(other.m_sku) 
+    {
         ut.alocpy(descItem, other.descItem);
     }
 
@@ -64,7 +67,7 @@ namespace sdds {
     }
 
     Item::operator bool() const {
-        return static_cast<bool>(state);
+        return descItem;
     }
 
     int Item::operator-=(int qty) {
@@ -76,7 +79,7 @@ namespace sdds {
         quantity += qty;
         return quantity;
     }
-
+      
     void Item::linear(bool isLinear) {
         flagLinear = isLinear;
     }
@@ -100,7 +103,8 @@ namespace sdds {
 
     std::ofstream& Item::save(std::ofstream& ofstr) const {
         if (state) {
-            ofstr << m_sku << '\t' << descItem << '\t' << quantity << '\t' << nQuantity << '\t' << std::fixed << std::setprecision(2) << price;
+            ofstr << m_sku << '\t' << descItem << '\t' << quantity << '\t' << nQuantity << '\t'
+                << std::fixed << std::setprecision(2) << price;
         }
         return ofstr;
     }
@@ -170,14 +174,16 @@ namespace sdds {
     }
 
 
+
     std::istream& Item::read(std::istream& istr) {
 
         std::cout << "AMA Item:" << std::endl;
         std::cout << "SKU: " << m_sku << std::endl;
 
+        delete[] descItem;
+        descItem = nullptr;
         char tmp[1000]{ '\0' };
         std::cout << "Description: ";
-        istr >> tmp;
         istr.getline(tmp, 1000, '\n');
         ut.alocpy(descItem, tmp);
 
@@ -189,9 +195,9 @@ namespace sdds {
     }
 
     int Item::readSku(std::istream& istr) {
-        std::cout << "SKU: ";
-        m_sku = ut.getint(40000, 99999);
+        m_sku = ut.getint(40000, 99999, "SKU: ");
         return m_sku;
     }
 
 }
+ 

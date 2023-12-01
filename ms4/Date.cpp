@@ -68,7 +68,6 @@ namespace sdds {
 		month = m;
 		day = d;
 		format = true;
-		validate();
 	}
 
 	const Status& Date::state() const {
