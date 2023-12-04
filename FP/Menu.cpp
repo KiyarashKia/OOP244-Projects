@@ -83,22 +83,19 @@ namespace sdds {
     }
 
 
-    void Menu::printItem(unsigned int option) {
-        unsigned int counter = 1;
-        for (size_t i = 0; i < strlen(options); i++)
-        {
-            if (options[i] == '\t')
-            {
+    void Menu::printItem(unsigned int selection) {
+        cout << endl << "****";
+        unsigned int counter{ 1 };
+        for (size_t i = 0; i < strlen(options); i++) {
+            if (options[i] == '\t') {
                 counter++;
                 i++;
             }
-            if (counter == option)
-            {
-                cout << options[i];
-            }
+            if (counter == selection) cout << options[i];
         }
-
+        cout << "****" << endl;
     }
+
 
 
 

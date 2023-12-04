@@ -25,7 +25,7 @@ namespace sdds {
 		char* name{ nullptr };
 		Menu mainMenu{ "List Items\tAdd Item\tRemove Item\tUpdate Quantity\tSort\tShip Items\tNew/Open Aid Database" };
 
-		unsigned int menu();
+		unsigned int menu() const;
 
 		// Menu Item 7
 		void save();

@@ -23,15 +23,13 @@ Date : 13/03/2023
 using namespace std;
 namespace sdds {
 	
-    unsigned int AidMan::menu() {
+    unsigned int AidMan::menu() const {
         Date date{};
-        date.formatted(true);
-
+        date.formatted(true); //Changing the date format
         cout << "Aid Management System" << endl << "Date: ";
-        cout << date << endl;
-        cout << "Data file: " << ((name) ? name : "No file") << endl;
+        cout << date << endl; //Printing Date
+        cout << "Data file: " << ((name) ? name : "No file") << endl; //Printing the chosen file
         cout << "---------------------------------" << endl;
-
         return mainMenu.run();
     }
 
@@ -143,11 +141,9 @@ namespace sdds {
     }
 
     void AidMan::save() {
-        if (name)
-        {
+        if (name) {
             ofstream file(name);
-            for (int i = 0; i < noItems; i++)
-            {
+            for (int i = 0; i < noItems; i++) {
                 m_items[i]->save(file) << endl;
             }
             file.close();
