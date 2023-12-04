@@ -3,8 +3,8 @@ I have done all the coding by myself and only copied the code that my professor 
 Student : Kiarash Kia
 Student ID: 108688235
 Email: kkia2@myseneca.ca
-MS5 - AidMan.cpp
-Date : 13/03/2023
+Milestone 5 - AirMan.cpp
+Date : 12/03/2023
  */
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -25,10 +25,10 @@ namespace sdds {
 	
     unsigned int AidMan::menu() const {
         Date date{};
-        date.formatted(true); //Changing the date format
+        date.formatted(true);
         cout << "Aid Management System" << endl << "Date: ";
-        cout << date << endl; //Printing Date
-        cout << "Data file: " << ((name) ? name : "No file") << endl; //Printing the chosen file
+        cout << date << endl;
+        cout << "Data file: " << ((name) ? name : "No file") << endl;
         cout << "---------------------------------" << endl;
         return mainMenu.run();
     }
