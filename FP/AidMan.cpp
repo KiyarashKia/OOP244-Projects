@@ -50,6 +50,44 @@ namespace sdds {
 
 	}
 
+
+    int AidMan::search(int sku) const {
+        for (int i = 0; i < noItems; i++) {
+            if (*m_items[i] == sku) return i;
+        }
+        return -1;
+    }
+
+
+    void AidMan::remove(int index) {
+        delete m_items[index];
+        m_items[index] = nullptr;
+        for (int i = index; i < noItems - 1; i++) {
+            m_items[i] = m_items[i + 1];
+        }
+        m_items[noItems - 1] = nullptr;
+        noItems--;
+    }
+
+    bool AidMan::smallerDiffQty(const iProduct* p1, const iProduct* p2) const {
+        return (p1->qtyNeeded() - p1->qty()) < (p2->qtyNeeded() - p2->qty());
+    }
+    void AidMan::swap(iProduct*& a, iProduct*& b) {
+        iProduct* temp = a;
+        a = b;
+        b = temp;
+    }
+
+    void AidMan::descendingSort(iProduct* arr[], int size) {
+        for (int i = 0; i < size - 1; ++i) {
+            for (int j = 0; j < size - i - 1; ++j) {
+                if (smallerDiffQty(arr[j], arr[j + 1])) {
+                    swap(arr[j], arr[j + 1]);
+                }
+            }
+        }
+    }
+
 	AidMan::~AidMan() {
 		deallocate();
 		delete[] name;
@@ -107,12 +145,12 @@ namespace sdds {
     void AidMan::save() {
         if (name)
         {
-            ofstream fileOpen(name);
+            ofstream file(name);
             for (int i = 0; i < noItems; i++)
             {
-                m_items[i]->save(fileOpen) << endl;
+                m_items[i]->save(file) << endl;
             }
-            fileOpen.close();
+            file.close();
         }
     }
 
@@ -226,5 +264,151 @@ namespace sdds {
         }
 
     }
+
+    void AidMan::addItem() {
+        if (noItems >= sdds_max_num_items) {
+            cout << "Database full!" << endl;
+        }
+        else {
+            Menu itemMenu("Perishable\tNon-Perishable");
+            int input = itemMenu.run();
+            if (input) {
+                m_items[noItems] = (input == 1) ? new Perishable : new Item;
+                int sku = m_items[noItems]->readSku(cin);
+                if (search(sku) < 0) {
+                    m_items[noItems]->read(cin);
+                    if (*m_items[noItems]) {
+                        ofstream file(name, ios::app);
+                        m_items[noItems]->save(file) << '\n';
+                        file.close();
+                        noItems++;
+                    }
+                    else {
+                        delete m_items[noItems];
+                        m_items[noItems] = nullptr;
+                    }
+                }
+                else {
+                    cout << "Sku: " << sku << " is already in the system, try updating quantity instead." << endl;
+                    delete m_items[noItems];
+                    m_items[noItems] = nullptr;
+                }
+            }
+            else {
+                cout << "Aborted" << endl;
+            }
+        }
+    }
+
+    void AidMan::removeItem() {
+        cout << "Item description: ";
+        char temp[1000]{};
+        cin.getline(temp, 1000);
+        if (list(temp)) {
+            int sku = ut.getint("Enter SKU: ");
+            int index = search(sku);
+            if (index >= 0) {
+                cout << "Following item will be removed: " << endl;
+                m_items[index]->linear(false);
+                m_items[index]->display(cout) << endl;
+                cout << "Are you sure?" << endl;
+                Menu confirmMenu("Yes!");
+                if (confirmMenu.run()) {
+                    remove(index);
+                    save();
+                    cout << "Item removed!" << endl;
+                }
+                else {
+                    cout << "Aborted!" << endl;
+                }
+            }
+            else {
+                cout << "SKU not found!" << endl;
+            }
+        }
+        else {
+            cout << "No matches found!" << endl;
+        }
+    }
+
+    void AidMan::updateQuantity() {
+        cout << "Item description: ";
+        char temp[1000]{};
+        cin.getline(temp, 1000);
+        if (list(temp)) {
+            int sku = ut.getint("Enter SKU: ");
+            int index = search(sku);
+            if (index >= 0) {
+                Menu qtyMenu("Add\tReduce");
+                switch (qtyMenu.run()) {
+                case 1:
+                    if (m_items[index]->qty() == m_items[index]->qtyNeeded()) {
+                        cout << "Quantity Needed already fulfilled!" << endl;
+                    }
+                    else {
+                        int addQty = ut.getint(1, m_items[index]->qtyNeeded(), "Quantity to add: ");
+                        *m_items[index] += addQty;
+                        cout << addQty << " items added!" << endl;
+                        save();
+                    }
+                    break;
+                case 2:
+                    if (m_items[index]->qty() == 0) {
+                        cout << "There are no Items to reduce!" << endl;
+                    }
+                    else {
+                        int reduceQty = ut.getint(1, m_items[index]->qty(), "Quantity to reduce: ");
+                        *m_items[index] -= reduceQty;
+                        cout << reduceQty << " items removed!" << endl;
+                        save();
+                    }
+                    break;
+                default:
+                    cout << "Aborted!" << endl;
+                    break;
+                }
+            }
+            else {
+                cout << "SKU not found!" << endl;
+            }
+        }
+        else {
+            cout << "No matches found!" << endl;
+        }
+    }
+
+    void AidMan::sort() {
+        descendingSort(m_items, noItems);
+        save();
+        cout << "Sort completed!" << endl;
+    }
+
+    void AidMan::shipItems() {
+        ofstream shipFile("shippingOrder.txt");
+        Date currentDate{};
+        currentDate.formatted(true);
+        shipFile << "Shipping Order, Date: " << currentDate << endl;
+        shipFile << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry" << endl;
+        shipFile << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+        int shippedItems = 0;
+        for (int i = 0; i < noItems; i++) {
+            if (m_items[i]->qty() == m_items[i]->qtyNeeded()) {
+                m_items[i]->linear(true);
+                shipFile << setw(4) << setfill(' ') << right << (++shippedItems) << " | ";
+                m_items[i]->display(shipFile) << endl;
+                remove(i);
+                i--;
+            }
+        }
+        shipFile << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
+        save();
+        cout << "Shipping Order for " << shippedItems << " items saved!" << endl;
+    }
+
+    void AidMan::loadDatabase() {
+        load();
+    }
+
+
 
 }
