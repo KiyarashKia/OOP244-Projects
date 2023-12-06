@@ -29,7 +29,7 @@ namespace sdds {
         cout << "Aid Management System" << endl << "Date: ";
         cout << date << endl;
         cout << "Data file: " << ((name) ? name : "No file") << endl;
-        cout << "---------------------------------" << endl;
+        cout << "-----------------" << endl;
         return mainMenu.run();
     }
 
