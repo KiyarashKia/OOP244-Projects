@@ -267,7 +267,7 @@ namespace sdds {
         }
         else {
             Menu itemMenu("Perishable\tNon-Perishable");
-            int input = itemMenu.run();
+            int input = itemMenu.run(false);
             if (input) {
                 m_items[noItems] = (input == 1) ? new Perishable : new Item;
                 int sku = m_items[noItems]->readSku(cin);

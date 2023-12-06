@@ -43,7 +43,7 @@ namespace sdds {
 	}
 
  
-    unsigned int Menu::run() const {
+    unsigned int Menu::run(bool flag) const {
         int userInput = 0;
         unsigned int index = 1;
 
@@ -58,7 +58,16 @@ namespace sdds {
                     cout << options[i];
                 }
             }
-            cout << endl << "---------------------------------" << endl << "0- Exit" << endl << "> ";
+            if (flag)
+            {
+                cout << endl << "---------------------------------" << endl << "0- Exit" << endl << "> ";
+
+            }
+            if (!flag)
+            {
+                cout << endl << "-----------------" << endl << "0- Exit" << endl << "> ";
+
+            }
 
             do {
                 cin >> userInput;

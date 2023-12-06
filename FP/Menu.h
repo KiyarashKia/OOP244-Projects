@@ -14,6 +14,7 @@ Date : 12/06/2023
 
 namespace sdds {
 
+	const int size = 33;
 	const int maxNumOptions = 15;
 
 	class Menu {
@@ -31,7 +32,7 @@ namespace sdds {
 		Menu(const Menu&) = delete;
 		Menu& operator=(const Menu&) = delete;
 
-		unsigned int run() const;
+		unsigned int run(bool flag = true) const;
 		void printItem(unsigned int option);
 	};
 
