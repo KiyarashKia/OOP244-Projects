@@ -3,8 +3,8 @@ I have done all the coding by myself and only copied the code that my professor 
 Student : Kiarash Kia
 Student ID: 108688235
 Email: kkia2@myseneca.ca
-Milestone 52 - Perishable.h
-Date : 12/06/2023
+Milestone 53 - Perishable.h
+Date : 12/08/2023
  */
 
 #ifndef SDDS_PERISHABLE_H
