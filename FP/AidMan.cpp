@@ -398,7 +398,7 @@ namespace sdds {
         }
         shipFile << "-----+-------+-------------------------------------+------+------+---------+-----------" << endl;
         save();
-        cout << "Shipping Order for " << shippedItems << " items saved!" << endl;
+        cout << "Shipping Order for " << shippedItems << " times saved!" << endl;
     }
 
     void AidMan::loadDatabase() {
