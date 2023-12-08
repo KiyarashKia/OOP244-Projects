@@ -304,7 +304,7 @@ namespace sdds {
             int sku = ut.getint("Enter SKU: ");
             int index = search(sku);
             if (index >= 0) {
-                cout << "Following item will be removed:" << endl;
+                cout << "Following item will be removed: " << endl;
                 m_items[index]->linear(false);
                 m_items[index]->display(cout) << endl;
                 cout << "Are you sure?" << endl;
