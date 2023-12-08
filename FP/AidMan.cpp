@@ -3,7 +3,7 @@ I have done all the coding by myself and only copied the code that my professor 
 Student : Kiarash Kia
 Student ID: 108688235
 Email: kkia2@myseneca.ca
-Milestone 53 - AidMan.cpp
+Milestone 54 - AidMan.cpp
 Date : 12/08/2023
  */
 
@@ -336,7 +336,7 @@ namespace sdds {
             int index = search(sku);
             if (index >= 0) {
                 Menu qtyMenu("Add\tReduce");
-                switch (qtyMenu.run()) {
+                switch (qtyMenu.run(false)) {
                 case 1:
                     if (m_items[index]->qty() == m_items[index]->qtyNeeded()) {
                         cout << "Quantity Needed already fulfilled!" << endl;
