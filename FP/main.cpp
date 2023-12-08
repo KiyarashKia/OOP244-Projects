@@ -1,7 +1,7 @@
 /***********************************************************************
-// Final project Milestone 54
+// Final project Milestone 55
 //
-// File: main54.cpp
+// File: main55.cpp
 // Version 1.0
 // Author  Fardad Soleimanloo
 // Description
@@ -16,7 +16,7 @@ I have done all the coding by myself and only copied the code that my professor 
 Student : Kiarash Kia
 Student ID: 108688235
 Email: kkia2@myseneca.ca
-Milestone 54 - main.cpp
+Milestone 55 - main.cpp
 Date : 12/08/2023
  */
 
@@ -31,7 +31,7 @@ void copyfile(const char* to, const char* from);
 void displayFile(const char* file);
 
 int main() {
-	copyfile("data.dat", "data54.dat");
+	copyfile("data.dat", "data55.dat");
 	ut.testMode();
 	AidMan().run();
 	displayFile("data.dat");
