@@ -60,7 +60,7 @@ namespace sdds {
             }
             if (flag)
             {
-                cout << endl << "---------------------------------" << endl << "0- Exit" << endl << "> ";
+                cout << endl << "0- Exit" << endl << "> ";
 
             }
             if (!flag)
